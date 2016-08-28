@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://Level.gd" type="Script" id=1]
+[ext_resource path="res://Tileset/tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://Units/Turret/Turret.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Units/walk_grid.gd" type="Script" id=4]
+[ext_resource path="res://Napoleon/Napoleon.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Napoleon/Grognard.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Napoleon/Officer.tscn" type="PackedScene" id=7]
+
+[node name="Level" type="Node"]
+
+script/script = ExtResource( 1 )
+
+[node name="TileMap" type="TileMap" parent="."]
+
+transform/pos = Vector2( -9, 0 )
+mode = 0
+tile_set = ExtResource( 2 )
+cell/size = Vector2( 32, 32 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 1
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 327691, 5, 327692, 1, 327693, 1, 327694, 1, 327695, 6, 393226, 5, 393227, 9, 393231, 10, 393232, 6, 458761, 5, 458762, 9, 458768, 10, 458769, 6, 524297, 3, 524301, 0, 524305, 4, 589833, 3, 589836, 0, 589837, 0, 589838, 0, 589841, 4, 655369, 3, 655373, 0, 655377, 4, 720905, 7, 720906, 12, 720912, 11, 720913, 8, 786442, 7, 786443, 12, 786447, 11, 786448, 8, 851979, 7, 851980, 2, 851981, 2, 851982, 2, 851983, 8 )
+
+[node name="Turret" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 423, 208 )
+
+[node name="Walk Grid" type="Node2D" parent="."]
+
+script/script = ExtResource( 4 )
+
+[node name="Napoleon" parent="." instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 423, 304 )
+
+[node name="Grognard" parent="." instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 391, 336 )
+
+[node name="Officer" parent="." instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 455, 336 )
+
+

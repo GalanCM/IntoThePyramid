@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://Napoleon/Napoleon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Napoleon/grognard.png" type="Texture" id=2]
+
+[node name="Grognard" instance=ExtResource( 1 )]
+
+max_health = 60.0
+max_moves = 6
+strength = 60
+can_melee = false
+
+[node name="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+
+
