@@ -10,7 +10,7 @@ func _ready():
 	next()
 	
 func next():
-	if index > troop_order.size():
+	if index >= troop_order.size():
 		return
 		
 	var troop = troop_order[index]

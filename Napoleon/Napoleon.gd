@@ -43,7 +43,11 @@ func move( direction=Vector2(0,0) ):
 		get_node('controls').queue_free()
 		yield( tween, "tween_complete" )
 		tween.queue_free()
-		GDLive.set_child( self, Move.new(), 'controls' )
+		if current_moves > 0:
+			GDLive.set_child( self, Move.new(), 'controls' )
+		else:
+			get_node("/root/Level").next()
+			
 	elif can_melee:
 		var space_state = get_world_2d().get_direct_space_state()
 		var result = space_state.intersect_ray( get_pos(), get_pos()+direction*33, [self] )
@@ -60,8 +64,12 @@ func move( direction=Vector2(0,0) ):
 			elif direction == Vector2(0,-1):
 				slash.set_rot( PI )
 				
+			slash.damage = strength
+			
 			add_child(slash)
-		
+			
+			get_node("/root/Level/Walk Grid").clear()
+			get_node('controls').queue_free()
 		
 func generate_grid():
 	var tilemap = get_node("/root/Level/TileMap")
@@ -162,6 +170,7 @@ class Fire extends Node:
 	var aim
 	
 	func _ready():
+		get_node("/root/Level/Walk Grid").clear()
 		aim = preload("res://Units/Aim.tscn").instance()
 		aim.set_pos( Vector2(-1,0) )
 		_.add_child( aim )
@@ -188,8 +197,13 @@ class Fire extends Node:
 				_.add_child(bullet)
 				
 				aim.queue_free()
+				set_fixed_process(false)
 				
-				GDLive.set_child( _, _.Move.new(), 'controls' )
+				yield( bullet, "exit_tree" )
+				queue_free()
+
+
 			else:
 				aim.queue_free()
+				queue_free()
 				GDLive.set_child( _, _.Move.new(), 'controls' )

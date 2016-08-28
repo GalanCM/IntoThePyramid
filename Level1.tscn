@@ -46,9 +46,12 @@ transform/pos = Vector2( 423, 304 )
 [node name="Grognard" parent="." instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 391, 336 )
+collision/margin = 0.0
 
 [node name="Officer" parent="." instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 455, 336 )
+collision/margin = 0.0
+max_moves = 5
 
 

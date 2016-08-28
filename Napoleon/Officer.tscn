@@ -6,6 +6,7 @@
 [node name="Officer" instance=ExtResource( 1 )]
 
 max_health = 80.0
+max_moves = 3
 strength = 25
 can_shoot = false
 
