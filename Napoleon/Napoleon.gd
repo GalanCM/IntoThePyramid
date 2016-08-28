@@ -29,7 +29,9 @@ func move( direction=Vector2(0,0) ):
 	var current_location = tilemap.world_to_map( get_pos() )
 	var new_pos = tilemap.map_to_world( current_location + direction ) + Vector2(8,16)
 	
-	if !test_move( direction * 33 ):
+	var space_state = get_world_2d().get_direct_space_state()
+	var result = space_state.intersect_ray( get_pos(), get_pos()+direction*33, [self] )
+	if result.empty():
 		current_moves -= 1
 		get_node("/root/Level/Walk Grid").clear()
 		
@@ -49,10 +51,7 @@ func move( direction=Vector2(0,0) ):
 			get_node("/root/Level").next()
 			
 	elif can_melee:
-		var space_state = get_world_2d().get_direct_space_state()
-		var result = space_state.intersect_ray( get_pos(), get_pos()+direction*33, [self] )
-		
-		if result.collider.is_in_group("Enemies"):
+		if not result.empty() and result.collider.is_in_group("Enemies"):
 			var slash = preload("res://Units/Slash.tscn").instance()
 			slash.set_pos( direction*33 )
 			if direction == Vector2(1,0):

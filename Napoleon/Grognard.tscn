@@ -6,7 +6,6 @@
 [node name="Grognard" instance=ExtResource( 1 )]
 
 max_health = 60.0
-max_moves = 5
 strength = 60
 can_melee = false
 
