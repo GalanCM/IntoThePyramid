@@ -1,6 +1,7 @@
 
 extends KinematicBody2D
 
+var damage
 
 func _ready():
 	add_collision_exception_with( get_parent() )
@@ -15,6 +16,7 @@ func _fixed_process(delta):
 		if is_visible() and collider.is_in_group('Enemies'):
 			var tilemap = get_node("/root/Level/TileMap")
 			var strike = preload("res://Units/Strike.tscn").instance()
+			strike.damage = damage
 			
 			collider.add_child( strike )
 			hide()

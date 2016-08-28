@@ -127,11 +127,11 @@ func get_new_cells( cell, dist, current_pos, valid_moves ):
 			var space_state = get_world_2d().get_direct_space_state()
 			var result = space_state.intersect_ray( start, tilemap.map_to_world(next_cell)+offset, [self] )
 			
-	#		var ray_draw = preload( "res://Ray Draw.tscn").instance()
-	#		if not result.empty():
-	#			ray_draw.set( tilemap.map_to_world(cell)+offset, result.position )
-	#		get_node("/root/Level/Walk Grid").add_child(ray_draw)
-	#		
+#			var ray_draw = preload( "res://Ray Draw.tscn").instance()
+#			if not result.empty():
+#				ray_draw.set( tilemap.map_to_world(cell)+offset, result.position )
+#			get_node("/root/Level/Walk Grid").add_child(ray_draw)
+			
 			if next_cell != current_pos and ( result.empty() == true or result.collider == self ):
 				moves.push_back( [next_cell,dist+1] )
 			if not result.empty() and result.collider.is_in_group("Enemies"):
@@ -192,6 +192,7 @@ class Fire extends Node:
 		if not Input.is_action_pressed('fire'):
 			if aim.complete:
 				var bullet = preload("res://Units/Bullet.tscn").instance()
+				bullet.damage = _.strength
 				bullet.set_transform( aim.get_transform() )
 				_.add_child(bullet)
 				
