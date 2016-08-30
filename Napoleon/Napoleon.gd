@@ -2,7 +2,7 @@
 extends KinematicBody2D
 
 export var max_health = 100.0
-var health = max_health
+onready var health = max_health
 
 export var max_moves = 5
 onready var current_moves = max_moves
@@ -20,8 +20,22 @@ func activate():
 	GDLive.set_child( self, Move.new(), 'controls' )
 	
 func take_damage( damage ):
+	get_node("/root/Level/SamplePlayer").play("slash")
 	health -= damage
+	print(health)
 	get_node("Health").update( health / max_health )
+	
+	if health <= 0:
+		get_node("/root/Level/SamplePlayer").play("blood")
+		get_node("Particles2D").set_emitting(true)
+		
+		var timer = Timer.new()
+		timer.set_wait_time(1)
+		add_child(timer)
+		timer.start()
+		
+		yield( timer, 'timeout' )
+		queue_free()
 	
 func move( direction=Vector2(0,0) ):
 	var tilemap = get_node("/root/Level/TileMap")
@@ -191,6 +205,7 @@ class Fire extends Node:
 
 		if not Input.is_action_pressed('fire'):
 			if aim.complete:
+				get_node("/root/Level/SamplePlayer").play("gunshot")
 				var bullet = preload("res://Units/Bullet.tscn").instance()
 				bullet.damage = _.strength
 				bullet.set_transform( aim.get_transform() )

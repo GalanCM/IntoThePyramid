@@ -1,7 +1,7 @@
 
 extends StaticBody2D
 
-var max_health = 20
+var max_health = 200
 var health = max_health
 
 func activate():
@@ -59,13 +59,14 @@ func activate():
 		
 		yield( tween, 'tween_complete' )
 		
+		get_node("/root/Level/SamplePlayer").play("lazer")
 		tween.interpolate_method( lazer, 'set_length', 0, ray.length(), ray.length()/1000, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT )
 		tween.start()
 		
 		yield( tween, 'tween_complete' )
 		tween.queue_free()
 		
-		pick.take_damage(50)
+		pick.take_damage(40)
 		
 	var timer = Timer.new()
 	timer.set_wait_time(0.2)
@@ -81,9 +82,11 @@ func activate():
 	
 	
 func take_damage( damage ):
+	get_node("/root/Level/SamplePlayer").play("slash")
 	health -= damage
 	
 	if health <= 0:
+		get_node("/root/Level/SamplePlayer").play("crash")
 		get_node("Particles2D").set_emitting(true)
 		
 		var timer = Timer.new()

@@ -6,12 +6,17 @@ extends Node
 var uniques = {}
 
 var troop_order = [ 'Napoleon', 'Grognard', 'Officer' ]
-var enemy_order = [ 'Turret' ]
+var enemy_order = [ 'Turret', 'Turret1', 'Turret2', 'Turret3', 'Turret4' ]
 var turn = 'enemy'
 var index = 0
 
 func _ready():
+	set_process_input(true)
 	next()
+	
+func _input(event):
+	if event.is_action_pressed("ui_cancel") and not event.is_echo():
+		get_tree().quit()
 	
 func next():
 	var unit_list
