@@ -19,6 +19,7 @@ func _fixed_process(delta):
 			strike.damage = damage
 			
 			collider.add_child( strike )
+			set_fixed_process(false)
 			hide()
 			
 			yield( strike, "exit_tree" )
