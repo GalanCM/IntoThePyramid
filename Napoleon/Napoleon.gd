@@ -68,7 +68,6 @@ func move( direction=Vector2(0,0) ):
 	elif can_melee:
 		if not result.empty() and result.collider.is_in_group("Enemies"):
 			var slash = preload("res://Units/Slash.tscn").instance()
-			slash.set_pos( direction*33 )
 			if direction == Vector2(1,0):
 				slash.set_rot( 0.5*PI )
 			elif direction == Vector2(-1,0):
@@ -80,7 +79,7 @@ func move( direction=Vector2(0,0) ):
 				
 			slash.damage = strength
 			
-			add_child(slash)
+			result.collider.add_child(slash)
 			
 			get_node("/root/Level/Walk Grid").clear()
 			get_node('controls').queue_free()
