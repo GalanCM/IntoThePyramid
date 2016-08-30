@@ -17,6 +17,7 @@ func _ready():
 	set_pos( tilemap.map_to_world( current_location ) + Vector2(8,16) )
 	
 func activate():
+	current_moves = max_moves
 	GDLive.set_child( self, Move.new(), 'controls' )
 	
 func take_damage( damage ):
