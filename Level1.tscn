@@ -48,21 +48,13 @@ tile_data = IntArray( 327691, 5, 327692, 1, 327693, 1, 327694, 1, 327695, 6, 393
 
 transform/pos = Vector2( 423, 208 )
 
-[node name="Turret4" parent="." instance=ExtResource( 3 )]
-
-transform/pos = Vector2( 391, 240 )
-
-[node name="Turret3" parent="." instance=ExtResource( 3 )]
-
-transform/pos = Vector2( 455, 240 )
-
 [node name="Turret1" parent="." instance=ExtResource( 3 )]
 
-transform/pos = Vector2( 359, 208 )
+transform/pos = Vector2( 360, 272 )
 
 [node name="Turret2" parent="." instance=ExtResource( 3 )]
 
-transform/pos = Vector2( 487, 208 )
+transform/pos = Vector2( 488, 272 )
 
 [node name="Walk Grid" type="Node2D" parent="."]
 
